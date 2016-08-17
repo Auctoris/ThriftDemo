@@ -22,18 +22,34 @@ int main(int argc, char **argv)
     boost::shared_ptr<TProtocol> protocol(new TBinaryProtocol(transport));
 
     LoggerClient client(protocol);
-    transport->open();
+    
+    try
+    {
+    
+        transport->open();
+    
+        client.timestamp(logfile);
+        std::cout << "Logged timestamp to log file" << std::endl;
 
-    client.timestamp(logfile);
-    std::cout << "Logged timestampt to log file" << std::endl;
+        client.write_log(logfile, "This is a message that I am writing to the log");
+        client.timestamp(logfile);
 
-    client.write_log(logfile, "This is a message that I am writing to the log");
-    client.timestamp(logfile);
+        client.get_last_log_entry(line, logfile);
+        std::cout << "Last line of the log file is: " << line << std::endl;
+        std::cout << "Size of log file is: " << client.get_log_size(logfile) << " bytes" << std::endl;
 
-    client.get_last_log_entry(line, logfile);
-    std::cout << "Last line of the log file is: " << line << std::endl;
-    std::cout << "Size of log file is: " << client.get_log_size(logfile) << " bytes" << std::endl;
+        transport->close();
+    }
 
-    transport->close();
+    catch (TTransportException e)
+    {
+        std::cout << "Error starting client" << std::endl;
+    }
+
+    catch (LoggerException e)
+    {
+        std::cout << e.error_description << std::endl;
+    }
+    
     return 0;
 }
