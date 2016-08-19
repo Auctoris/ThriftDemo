@@ -27,7 +27,7 @@ class LoggerHandler (Logger.Iface):
         except IOError as e:
             err = LoggerException()
             err.error_code = 1 
-            err.error_description = "Could not open file " & filename
+            err.error_description = "Could not open file " + filename
             raise err
 
     def get_last_log_entry(self, filename):
@@ -43,7 +43,7 @@ class LoggerHandler (Logger.Iface):
         except IOError as e:
             err = LoggerException()
             err.error_code = 1 
-            err.error_description = "Could not open file " & filename
+            err.error_description = "Could not open file " + filename
             raise err
 
     def write_log(self, filename, message):
@@ -54,7 +54,7 @@ class LoggerHandler (Logger.Iface):
         except IOError as e:
             err = LoggerException()
             err.error_code = 1 
-            err.error_description = "Could not open file " & filename
+            err.error_description = "Could not open file " + filename
             raise err
     
     def get_log_size(self, filename):
