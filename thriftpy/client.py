@@ -22,6 +22,5 @@ except thriftpy.transport.TTransportException, e:
     print ("Error starting client")
 except thriftpy.Thrift.TApplicationException, e:
     print ("%s" % (e))
-
 except thriftpy.thrift.TException, e:
     print ("Error: %d %s" % (e.error_code, e.error_description))
