@@ -5,7 +5,7 @@ logger_service = thriftpy.load("../LoggerService.thrift", "loggerservice_thrift"
 from thriftpy.rpc import make_client
 
 try:
-    client = make_client(logger_service.Logger, '127.0.0.1', 9090)
+    client = make_client(logger_service.Logger, 'localhost', 9090)
 
     logfile = "logofile.log"
 

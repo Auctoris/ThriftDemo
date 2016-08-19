@@ -46,5 +46,5 @@ class Dispatcher(object):
     def get_log_size(self, filename):
         return os.path.getsize(filename)
 
-server = make_server(logger_service.Logger, Dispatcher(), '127.0.0.1', 9090)
+server = make_server(logger_service.Logger, Dispatcher(), 'localhost', 9090)
 server.serve()
